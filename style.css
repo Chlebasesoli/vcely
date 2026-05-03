@@ -334,6 +334,42 @@ p:last-child { margin-bottom: 0; }
   line-height: 1.65;
 }
 
+/* ── More articles link ── */
+.more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .72rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 3px;
+  transition: color .2s, border-color .2s;
+}
+.more-link::after {
+  content: '→';
+  font-size: .9rem;
+  transition: transform .2s;
+}
+.more-link:hover { color: var(--honey); border-color: var(--honey); }
+.more-link:hover::after { transform: translateX(4px); }
+
+/* ── Archive page ── */
+.archive-top {
+  padding: 100px 8vw 52px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2px;
+  background: var(--border);
+  margin-top: 48px;
+}
+
 /* ── Quote block ── */
 .quote-block {
   border-left: 3px solid var(--honey);
@@ -411,7 +447,7 @@ html[lang="en"] blockquote[data-en], html[lang="en"] h3[data-en] { display: bloc
 /* shared (lang-neutral) elements always visible */
 [data-shared] { display: revert; }
 div[data-shared], section[data-shared] { display: block; }
-.facts[data-shared], .posts-grid[data-shared], .split[data-shared], .principles[data-shared] { display: grid; }
+.facts[data-shared], .posts-grid[data-shared], .split[data-shared], .principles[data-shared], .archive-grid[data-shared] { display: grid; }
 footer[data-shared] { display: flex; }
 
 /* ── Article pages ── */
@@ -434,8 +470,10 @@ footer[data-shared] { display: flex; }
 }
 .back-link:hover { color: var(--honey); }
 .back-link svg { flex-shrink: 0; }
-.article-top .section-label { margin-bottom: 16px; }
-.article-top h1 {
+.article-top .section-label,
+.archive-top .section-label { margin-bottom: 16px; }
+.article-top h1,
+.archive-top h1 {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2rem, 5vw, 3.4rem);
   font-weight: 400;
@@ -443,7 +481,8 @@ footer[data-shared] { display: flex; }
   color: var(--dark);
   margin-bottom: 20px;
 }
-.article-top h1 em { font-style: italic; color: var(--honey); }
+.article-top h1 em,
+.archive-top h1 em { font-style: italic; color: var(--honey); }
 .article-meta {
   font-size: .7rem;
   letter-spacing: .14em;

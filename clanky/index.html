@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Zápisky ze včelnice · Včely</title>
+  <meta name="description" content="Všechny zápisky ze včelnice v Slepičích horách."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../style.css"/>
+</head>
+<body>
+
+<div class="lang-bar">
+  <div class="lang-switcher">
+    <button id="btn-cs" class="active" onclick="setLang('cs')">CZ</button>
+    <button id="btn-de" onclick="setLang('de')">DE</button>
+    <button id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<div class="archive-top">
+  <a class="back-link" href="../index.html">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
+    </svg>
+    <span data-cs>Zpět</span>
+    <span data-de>Zurück</span>
+    <span data-en>Back</span>
+  </a>
+
+  <p class="section-label" style="margin-top:48px;" data-cs>Ze včelnice</p>
+  <p class="section-label" style="margin-top:48px;" data-de>Aus dem Bienenstock</p>
+  <p class="section-label" style="margin-top:48px;" data-en>From the apiary</p>
+
+  <h1 data-cs>Zápisky<br/><em>ze sezóny</em></h1>
+  <h1 data-de>Notizen<br/><em>aus der Saison</em></h1>
+  <h1 data-en>Notes<br/><em>from the season</em></h1>
+
+  <div class="archive-grid" data-shared>
+
+    <!-- Post 1 -->
+    <a class="post-card" href="prvni-vcely.html">
+      <div class="post-card-img">
+        <img src="../photos/plast.jpg" alt="Prohlídka plástu" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center 30%;">
+      </div>
+      <div class="post-card-body">
+        <div class="post-date" data-cs>Březen 2026</div>
+        <div class="post-date" data-de>März 2026</div>
+        <div class="post-date" data-en>March 2026</div>
+        <div class="post-title" data-cs>První včelstva přišla do Slepičích hor</div>
+        <div class="post-title" data-de>Die ersten Völker kommen in die Hühnerberge</div>
+        <div class="post-title" data-en>The first colonies arrive in Slepičí Hory</div>
+        <div class="post-excerpt" data-cs>Dubnového rána jsme vynesli první dva Warré úly na kraj lesa nad Kaplici. Tiše jsme otevřeli česna a sledovali, jak se včely poprvé rozletěly do krajiny, která se od teď stane jejich domovem.</div>
+        <div class="post-excerpt" data-de>An einem Aprilmorgen trugen wir die ersten zwei Warré-Beuten an den Waldrand über Kaplice. Wir öffneten die Fluglöcher und beobachteten, wie die Bienen zum ersten Mal in die Landschaft ausflogen, die nun ihr Zuhause werden soll.</div>
+        <div class="post-excerpt" data-en>On an April morning we carried the first two Warré hives to the forest edge above Kaplice. We quietly opened the entrances and watched as the bees flew out for the first time into the landscape that would from now on be their home.</div>
+      </div>
+    </a>
+
+    <!-- Post 2 -->
+    <a class="post-card" href="warre-ul.html">
+      <div class="post-card-img">
+        <img src="../photos/uly.jpg" alt="Warré úly na louce" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center 60%;">
+      </div>
+      <div class="post-card-body">
+        <div class="post-date" data-cs>Duben 2026</div>
+        <div class="post-date" data-de>April 2026</div>
+        <div class="post-date" data-en>April 2026</div>
+        <div class="post-title" data-cs>Co je vlastně včelaření ve Warré úlu?</div>
+        <div class="post-title" data-de>Was ist eigentlich Imkerei in der Warré-Beute?</div>
+        <div class="post-title" data-en>What is beekeeping in a Warré hive, really?</div>
+        <div class="post-excerpt" data-cs>Abbé Warré strávil desítky let hledáním úlu, který by co nejvíce připomínal přirozené dutiny stromů. Výsledkem je jednoduchá konstrukce, ve které včely staví shora dolů — tak, jak to dělaly miliony let před námi.</div>
+        <div class="post-excerpt" data-de>Abbé Warré verbrachte Jahrzehnte damit, eine Beute zu finden, die natürlichen Baumhöhlen so nah wie möglich kommt. Das Ergebnis ist eine einfache Konstruktion, in der Bienen von oben nach unten bauen — so wie sie es Millionen von Jahren vor uns getan haben.</div>
+        <div class="post-excerpt" data-en>Abbé Warré spent decades searching for a hive that would come as close as possible to natural tree cavities. The result is a simple design in which bees build from top to bottom — just as they have done for millions of years before us.</div>
+      </div>
+    </a>
+
+    <!-- Post 3 -->
+    <a class="post-card" href="slow-food.html">
+      <div class="post-card-img">
+        <img src="../photos/vcelari.jpg" alt="Včelaři u úlů" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center 40%;">
+      </div>
+      <div class="post-card-body">
+        <div class="post-date" data-cs>Květen 2026</div>
+        <div class="post-date" data-de>Mai 2026</div>
+        <div class="post-date" data-en>May 2026</div>
+        <div class="post-title" data-cs>Včely a Slow Food — nejde o výnos</div>
+        <div class="post-title" data-de>Bienen und Slow Food — es geht nicht um den Ertrag</div>
+        <div class="post-title" data-en>Bees and Slow Food — it's not about yield</div>
+        <div class="post-excerpt" data-cs>Spolupracujeme s jihočeskou sítí Slow Food na společném cíli: zdravé včely v kulturní krajině. Ne maximum medu, ale maximum smyslu. Med jako doklad toho, že krajina ještě žije.</div>
+        <div class="post-excerpt" data-de>Wir arbeiten mit dem südböhmischen Slow-Food-Netzwerk an einem gemeinsamen Ziel: gesunde Bienen in der Kulturlandschaft. Nicht maximaler Honig, sondern maximaler Sinn. Honig als Zeugnis, dass die Landschaft noch lebt.</div>
+        <div class="post-excerpt" data-en>We work with the South Bohemian Slow Food network towards a shared goal: healthy bees in a living landscape. Not maximum honey, but maximum meaning. Honey as evidence that the land is still alive.</div>
+      </div>
+    </a>
+
+    <!-- Post 4 -->
+    <a class="post-card" href="klid-vcelstva.html">
+      <div class="post-card-img">
+        <img src="../photos/hero.jpg" alt="Včely na plástvi" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center 40%;">
+      </div>
+      <div class="post-card-body">
+        <div class="post-date" data-cs>Červen 2026</div>
+        <div class="post-date" data-de>Juni 2026</div>
+        <div class="post-date" data-en>June 2026</div>
+        <div class="post-title" data-cs>Proč necháváme včely v klidu</div>
+        <div class="post-title" data-de>Warum wir die Bienen in Ruhe lassen</div>
+        <div class="post-title" data-en>Why we leave the bees in peace</div>
+        <div class="post-excerpt" data-cs>Každé otevření úlu je stres. Teplota klesne, feromonová komunikace se naruší, kolonie potřebuje hodiny, aby se vrátila do rovnováhy. Naučili jsme se odolávat pokušení zasahovat — a tady je proč.</div>
+        <div class="post-excerpt" data-de>Jedes Öffnen des Stocks bedeutet Stress. Die Temperatur sinkt, die Pheromonkommunikation wird gestört, das Volk braucht Stunden, um ins Gleichgewicht zurückzufinden. Wir haben gelernt, dem Drang zum Eingreifen zu widerstehen — und hier ist der Grund.</div>
+        <div class="post-excerpt" data-en>Every hive opening is stress. Temperature drops, pheromone communication is disrupted, the colony needs hours to return to balance. We have learned to resist the temptation to intervene — and here is why.</div>
+      </div>
+    </a>
+
+  </div><!-- /archive-grid -->
+</div><!-- /archive-top -->
+
+<footer data-shared>
+  <a class="footer-logo" href="../index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:inherit;">
+    <svg width="20" height="20" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 28C16 20 28 20 28 28C28 36 16 36 16 28Z"/>
+      <path d="M18 19C18 14 26 14 26 19C26 23 18 23 18 19Z"/>
+      <path d="M18 25C14 22 10 17 16 14"/>
+      <path d="M26 25C30 22 34 17 28 14"/>
+      <line x1="17" y1="27" x2="27" y2="27"/>
+      <line x1="16.5" y1="31" x2="27.5" y2="31"/>
+      <path d="M20 14C18 11 16 9 15 8"/>
+      <path d="M24 14C26 11 28 9 29 8"/>
+      <circle cx="15" cy="8" r="1.2" fill="currentColor" stroke="none"/>
+      <circle cx="29" cy="8" r="1.2" fill="currentColor" stroke="none"/>
+    </svg>
+    Včely · Bienen · Bees
+  </a>
+  <div class="footer-note" data-cs>Psáno s láskou ke krajině a pomalému jídlu.</div>
+  <div class="footer-note" data-de>Geschrieben mit Liebe zur Landschaft und zum langsamen Essen.</div>
+  <div class="footer-note" data-en>Written with love for the land and slow food.</div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.getElementById('btn-cs').classList.toggle('active', lang === 'cs');
+    document.getElementById('btn-de').classList.toggle('active', lang === 'de');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('lang', lang);
+  }
+  const saved = localStorage.getItem('lang');
+  if (saved === 'de' || saved === 'en') setLang(saved);
+</script>
+</body>
+</html>
