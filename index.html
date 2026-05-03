@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Včely · Bienen · Bees</title>
+  <meta name="description" content="O důležitosti včel a filosofii Slow Food. Über die Bedeutung der Bienen. On the importance of bees and Slow Food."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #faf6ef;
+      --warm-white: #fffdf9;
+      --honey: #c8860a;
+      --honey-light: #e8a020;
+      --dark: #1c1a16;
+      --mid: #4a4540;
+      --light: #9a9088;
+      --border: #e8e0d0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--warm-white);
+      color: var(--dark);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    /* ── Language toggle ── */
+    .lang-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: flex-end;
+      padding: 14px 28px;
+      background: linear-gradient(to bottom, rgba(255,253,249,0.95), transparent);
+    }
+    .lang-switcher {
+      display: flex;
+      gap: 4px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3px;
+      background: var(--warm-white);
+    }
+    .lang-switcher button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: 4px 14px;
+      border-radius: 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      color: var(--light);
+      transition: all .2s;
+    }
+    .lang-switcher button.active {
+      background: var(--dark);
+      color: var(--warm-white);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      height: 100svh;
+      min-height: 520px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(.65);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top,
+        rgba(10,8,4,.82) 0%,
+        rgba(10,8,4,.45) 38%,
+        rgba(10,8,4,.0) 68%);
+      pointer-events: none;
+    }
+    .hero-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, #3d2e0a 0%, #7a5010 45%, #c8860a 100%);
+    }
+    .hero-placeholder-icon {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8rem;
+      opacity: .12;
+      user-select: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 8vw 10vh;
+      max-width: 900px;
+    }
+    .hero-eyebrow {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--honey-light);
+      margin-bottom: 16px;
+      white-space: nowrap;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.12;
+      text-shadow: 0 2px 24px rgba(0,0,0,.45);
+      margin-bottom: 20px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--honey-light);
+    }
+    .hero-sub {
+      font-size: clamp(.88rem, 1.5vw, 1rem);
+      color: rgba(255,255,255,.72);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,.4);
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      animation: bounce 2.4s ease-in-out infinite;
+    }
+    .scroll-hint::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,.25);
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── Sections ── */
+    section {
+      padding: 72px 8vw;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--honey);
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 32px;
+      color: var(--dark);
+    }
+    h2 em { font-style: italic; color: var(--honey); }
+
+    .lead {
+      font-size: clamp(1rem, 1.6vw, 1.12rem);
+      color: var(--mid);
+      max-width: 640px;
+      margin-bottom: 28px;
+    }
+    p {
+      color: var(--mid);
+      max-width: 640px;
+      margin-bottom: 20px;
+    }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Manifesto ── */
+    .manifesto {
+      background: var(--dark);
+      padding: 80px 8vw;
+    }
+    .manifesto .section-label { color: var(--honey-light); }
+    .manifesto h2 { color: #fff; max-width: 700px; }
+    .manifesto h2 em { color: var(--honey-light); }
+    .manifesto .principles {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px 60px;
+      margin-top: 52px;
+      max-width: 860px;
+    }
+    .principle-icon { margin-bottom: 16px; color: var(--honey-light); }
+    .principle-icon svg { display: block; }
+    .principle-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .principle-text {
+      font-size: .84rem;
+      color: rgba(255,255,255,.55);
+      line-height: 1.7;
+    }
+    .manifesto-lead {
+      font-size: clamp(1rem, 1.6vw, 1.12rem);
+      color: rgba(255,255,255,.7);
+      max-width: 620px;
+      margin-bottom: 0;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--honey);
+      margin: 0 auto 0;
+      max-width: 1100px;
+      padding: 0 8vw;
+      box-sizing: content-box;
+    }
+
+    /* ── Facts grid ── */
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      margin-top: 48px;
+      background: var(--border);
+    }
+    .fact {
+      background: var(--warm-white);
+      padding: 36px 28px;
+    }
+    .fact-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 600;
+      color: var(--honey);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .fact-text {
+      font-size: .85rem;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    /* ── Image + text split ── */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    @media (max-width: 720px) {
+      .split { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 52px 6vw; }
+      .manifesto { padding: 60px 6vw; }
+      .manifesto .principles { grid-template-columns: 1fr; gap: 36px; }
+      .facts { grid-template-columns: 1fr; }
+    }
+    .split-img {
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .split-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .split-img-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #e8d5b0 0%, #c8a060 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      color: rgba(255,255,255,.5);
+    }
+
+    /* ── Blog posts ── */
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2px;
+      margin-top: 48px;
+      background: var(--border);
+    }
+    .post-card {
+      background: var(--warm-white);
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .post-card:hover { background: var(--cream); }
+    .post-card-img {
+      aspect-ratio: 16/10;
+      overflow: hidden;
+    }
+    .post-card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s ease;
+    }
+    .post-card:hover .post-card-img img { transform: scale(1.04); }
+    .post-card-img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .post-card-body { padding: 24px 24px 28px; }
+    .post-date {
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 8px;
+    }
+    .post-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      line-height: 1.35;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    .post-excerpt {
+      font-size: .82rem;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+
+    /* ── Quote block ── */
+    .quote-block {
+      border-left: 3px solid var(--honey);
+      padding: 28px 36px;
+      margin: 60px 0;
+      background: var(--cream);
+    }
+    blockquote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+      color: var(--dark);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    cite {
+      font-size: .78rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--honey);
+      font-style: normal;
+    }
+
+    /* ── Full-width image ── */
+    .full-img {
+      width: 100%;
+      height: 50vw;
+      max-height: 580px;
+      min-height: 260px;
+      overflow: hidden;
+      position: relative;
+    }
+    .full-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .full-img-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(180deg, #4a3010 0%, #8a5c1a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      opacity: .6;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 8vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--dark);
+    }
+    .footer-note {
+      font-size: .75rem;
+      color: var(--light);
+    }
+
+    /* ── Language visibility ── */
+    [data-cs], [data-de], [data-en] { display: none; }
+    html[lang="cs"] [data-cs] { display: revert; }
+    html[lang="de"] [data-de] { display: revert; }
+    html[lang="en"] [data-en] { display: revert; }
+    html[lang="cs"] section[data-cs], html[lang="cs"] div[data-cs],
+    html[lang="cs"] p[data-cs], html[lang="cs"] h2[data-cs],
+    html[lang="cs"] blockquote[data-cs] { display: block; }
+    html[lang="de"] section[data-de], html[lang="de"] div[data-de],
+    html[lang="de"] p[data-de], html[lang="de"] h2[data-de],
+    html[lang="de"] blockquote[data-de] { display: block; }
+    html[lang="en"] section[data-en], html[lang="en"] div[data-en],
+    html[lang="en"] p[data-en], html[lang="en"] h2[data-en],
+    html[lang="en"] blockquote[data-en] { display: block; }
+
+    /* shared (lang-neutral) elements always visible */
+    [data-shared] { display: revert; }
+    div[data-shared], section[data-shared] { display: block; }
+    /* restore grid/flex on containers that also carry data-shared */
+    .facts[data-shared], .posts-grid[data-shared], .split[data-shared], .principles[data-shared] { display: grid; }
+    footer[data-shared] { display: flex; }
+  </style>
+</head>
+<body>
+
+<!-- Language bar -->
+<div class="lang-bar">
+  <div class="lang-switcher">
+    <button id="btn-cs" class="active" onclick="setLang('cs')">CZ</button>
+    <button id="btn-de" onclick="setLang('de')">DE</button>
+    <button id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <img class="hero-img" src="photos/hero.jpg" alt="Včely na plástvi">
+
+  <div class="hero-content">
+    <p class="hero-eyebrow" data-cs>Slepičí hory · Jižní Čechy · Slow Food</p>
+    <p class="hero-eyebrow" data-de>Hühnerberge · Südböhmen · Slow Food</p>
+    <p class="hero-eyebrow" data-en>Slepičí Hory · South Bohemia · Slow Food</p>
+
+    <h1 class="hero-title" data-cs>Bez včel<br/><em>není budoucnost</em></h1>
+    <h1 class="hero-title" data-de>Ohne Bienen<br/><em>keine Zukunft</em></h1>
+    <h1 class="hero-title" data-en>Without bees<br/><em>no future</em></h1>
+
+    <p class="hero-sub" data-cs>Chováme včely v přírodě Slepičích hor. Mezi buky, žulou a loukami přírodního parku v jižních Čechách.</p>
+    <p class="hero-sub" data-de>Wir halten Bienen in der Natur der Hühnerberge. Zwischen Buchen, Granit und den Wiesen des Naturparks in Südböhmen.</p>
+    <p class="hero-sub" data-en>We keep bees in the nature of Slepičí Hory. Among beech trees, granite and the meadows of a nature park in South Bohemia.</p>
+  </div>
+
+  <div class="scroll-hint">
+    <span data-cs>Číst dál</span>
+    <span data-de>Weiterlesen</span>
+    <span data-en>Read on</span>
+  </div>
+</div>
+
+<!-- ── SLEPIČÍ HORY ── -->
+<section>
+  <div class="split" data-shared>
+    <div>
+      <p class="section-label" data-cs>Naše včelnice</p>
+      <p class="section-label" data-de>Unsere Imkerei</p>
+      <p class="section-label" data-en>Our apiary</p>
+
+      <h2 data-cs>Slepičí hory —<br/><em>domov našich včel</em></h2>
+      <h2 data-de>Hühnerberge —<br/><em>Heimat unserer Bienen</em></h2>
+      <h2 data-en>Slepičí Hory —<br/><em>home of our bees</em></h2>
+
+      <p data-cs>Slepičí hory jsou přírodní park v jižních Čechách, ukrytý mezi Kaplici a Trhovými Sviny. Žulové skály, bukové porosty, smrkové lesy a louky plné divokých květů — krajina, která vznikala tisíce let a dnes je domovem pro nespočet druhů.</p>
+      <p data-de>Die Hühnerberge sind ein Naturpark in Südböhmen, versteckt zwischen Kaplice und Trhové Sviny. Granitfelsen, Buchenwälder, Fichtenforste und blumenreiche Wiesen — eine Landschaft, die Jahrtausende gewachsen ist und heute unzähligen Arten Heimat bietet.</p>
+      <p data-en>Slepičí Hory is a nature park in South Bohemia, tucked between the towns of Kaplice and Trhové Sviny. Granite rocks, beech groves, spruce forests and meadows full of wild flowers — a landscape that took thousands of years to form and is home today to countless species.</p>
+
+      <p data-cs>V tomto prostředí chováme naše včelstva. Daleko od intenzivního zemědělství, průmyslu a pesticidů. Včely tu mají přístup k pestrému spektru rostlin — od jarního sněženky přes letní lipové květy až po podzimní vřes. Každý med nese otisk tohoto konkrétního místa.</p>
+      <p data-de>In dieser Umgebung halten wir unsere Bienenvölker. Weit entfernt von intensiver Landwirtschaft, Industrie und Pestiziden. Die Bienen haben Zugang zu einem vielfältigen Pflanzenspektrum — vom Frühjahrsschneeglöckchen über die sommerlichen Lindenblüten bis zum Herbstheidekraut. Jeder Honig trägt den Fingerabdruck dieses besonderen Ortes.</p>
+      <p data-en>This is where we keep our colonies. Far from intensive agriculture, industry and pesticides. The bees have access to a diverse range of plants — from spring snowdrops through summer linden blossom to autumn heather. Every honey carries the imprint of this specific place.</p>
+
+      <p data-cs>Přírodní park byl vyhlášen roku 1995. Nejvyšší vrchol — Kohout — dosahuje 871 metrů. Celé území odvodňuje řeka Malše. Je to místo, kde se čas zpomalil. Přesně to, co Slow Food hlásá.</p>
+      <p data-de>Der Naturpark wurde 1995 ausgewiesen. Der höchste Gipfel — Kohout — erreicht 871 Meter. Das gesamte Gebiet entwässert in die Malše. Es ist ein Ort, wo die Zeit langsamer wird. Genau das, was Slow Food predigt.</p>
+      <p data-en>The nature park was designated in 1995. The highest peak — Kohout — reaches 871 metres. The entire area drains into the Malše river. It is a place where time has slowed down. Exactly what Slow Food preaches.</p>
+    </div>
+    <div class="split-img">
+      <img src="photos/luka.jpg" alt="Krajina Slepičích hor" style="width:100%;height:100%;object-fit:cover;display:block;">
+    </div>
+  </div>
+</section>
+
+<!-- ── MANIFESTO ── -->
+<div class="manifesto" data-shared>
+  <p class="section-label" data-cs>Kdo jsme</p>
+  <p class="section-label" data-de>Wer wir sind</p>
+  <p class="section-label" data-en>Who we are</p>
+
+  <h2 data-cs>Několik lidí<br/>ze Slepičích hor,<br/>kterým záleží na <em>včelách</em></h2>
+  <h2 data-de>Ein paar Menschen<br/>aus den Hühnerbergen,<br/>denen <em>Bienen</em> am Herzen liegen</h2>
+  <h2 data-en>A few people<br/>from Slepičí Hory,<br/>who care about <em>bees</em></h2>
+
+  <p class="manifesto-lead" style="margin-top:28px;" data-cs>Nejsme profesionální včelaři ani výzkumníci. Jsme sousedé, kteří se rozhodli dělat věci jinak — s úctou k tomu, co včely potřebují ony, ne co potřebujeme my.</p>
+  <p class="manifesto-lead" style="margin-top:28px;" data-de>Wir sind keine professionellen Imker oder Forscher. Wir sind Nachbarn, die entschieden haben, die Dinge anders zu machen — mit Respekt für das, was Bienen brauchen, nicht was wir brauchen.</p>
+  <p class="manifesto-lead" style="margin-top:28px;" data-en>We are not professional beekeepers or researchers. We are neighbours who decided to do things differently — with respect for what bees need, not what we need.</p>
+
+  <div class="principles">
+    <div>
+      <div class="principle-icon">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 18L22 8L36 18"/>
+          <path d="M12 18L12 26L32 26L32 18"/>
+          <path d="M12 26L12 34L32 34L32 26"/>
+          <path d="M12 34L12 41L32 41L32 34"/>
+          <path d="M18 41L26 41" stroke-width="2"/>
+          <path d="M19 41L19 39L25 39L25 41"/>
+        </svg>
+      </div>
+      <div class="principle-title" data-cs>Warré úly</div>
+      <div class="principle-title" data-de>Warré-Beuten</div>
+      <div class="principle-title" data-en>Warré hives</div>
+      <div class="principle-text" data-cs>Chováme ve Warré úlech — konstrukci, která kopíruje přirozené dutiny stromů a respektuje způsob, jakým včely přirozeně staví. Včela rozhoduje, ne včelař.</div>
+      <div class="principle-text" data-de>Wir halten in Warré-Beuten — einer Konstruktion, die natürliche Baumhöhlen nachahmt und die Art respektiert, wie Bienen von Natur aus bauen. Die Biene entscheidet, nicht der Imker.</div>
+      <div class="principle-text" data-en>We keep bees in Warré hives — a design that mimics natural tree cavities and respects the way bees build naturally. The bee decides, not the beekeeper.</div>
+    </div>
+    <div>
+      <div class="principle-icon">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 21C11 29 16 34 22 34C28 34 33 29 33 21"/>
+          <line x1="8" y1="21" x2="36" y2="21"/>
+          <line x1="22" y1="34" x2="22" y2="40"/>
+          <line x1="17" y1="40" x2="27" y2="40"/>
+          <line x1="8" y1="9" x2="36" y2="38"/>
+        </svg>
+      </div>
+      <div class="principle-title" data-cs>Nekrmíme</div>
+      <div class="principle-title" data-de>Kein Zufüttern</div>
+      <div class="principle-title" data-en>No feeding</div>
+      <div class="principle-text" data-cs>Nenakrmujeme cukrem ani náhražkami. Včelám necháváme dost vlastního medu na zimu. Med, který odebereme, je skutečný přebytek — ne výsledek naší chamtivosti.</div>
+      <div class="principle-text" data-de>Wir füttern nicht mit Zucker oder Ersatzstoffen. Wir lassen den Bienen genug eigenen Honig für den Winter. Der Honig, den wir entnehmen, ist echter Überschuss — kein Ergebnis unserer Gier.</div>
+      <div class="principle-text" data-en>We do not feed with sugar or substitutes. We leave the bees enough of their own honey for winter. The honey we take is a genuine surplus — not the result of our greed.</div>
+    </div>
+    <div>
+      <div class="principle-icon">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 38C22 38 7 28 8 15C8 9 14 6 22 9C30 6 36 9 36 15C37 28 22 38 22 38Z"/>
+          <path d="M22 38C22 38 22 18 22 9"/>
+          <path d="M22 30C22 30 15 24 13 20"/>
+          <path d="M22 30C22 30 29 24 31 20"/>
+          <path d="M22 22C22 22 16 18 15 15"/>
+          <path d="M22 22C22 22 28 18 29 15"/>
+        </svg>
+      </div>
+      <div class="principle-title" data-cs>Žádná chemie</div>
+      <div class="principle-title" data-de>Keine Chemie</div>
+      <div class="principle-title" data-en>No chemicals</div>
+      <div class="principle-text" data-cs>Nepoužíváme syntetická léčiva ani pesticidy. Pracujeme s přírodou, ne proti ní. Zdravé prostředí Slepičích hor je naší největší ochranou.</div>
+      <div class="principle-text" data-de>Wir verwenden keine synthetischen Medikamente oder Pestizide. Wir arbeiten mit der Natur, nicht gegen sie. Die gesunde Umgebung der Hühnerberge ist unser größter Schutz.</div>
+      <div class="principle-text" data-en>We use no synthetic treatments or pesticides. We work with nature, not against it. The healthy environment of Slepičí Hory is our greatest protection.</div>
+    </div>
+    <div>
+      <div class="principle-icon">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 28C16 20 28 20 28 28C28 36 16 36 16 28Z"/>
+          <path d="M18 19C18 14 26 14 26 19C26 23 18 23 18 19Z"/>
+          <path d="M18 25C14 22 10 17 16 14"/>
+          <path d="M26 25C30 22 34 17 28 14"/>
+          <line x1="17" y1="27" x2="27" y2="27"/>
+          <line x1="16.5" y1="31" x2="27.5" y2="31"/>
+          <path d="M20 14C18 11 16 9 15 8"/>
+          <path d="M24 14C26 11 28 9 29 8"/>
+          <circle cx="15" cy="8" r="1.2" fill="currentColor" stroke="none"/>
+          <circle cx="29" cy="8" r="1.2" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <div class="principle-title" data-cs>Jejich potřeby, ne naše</div>
+      <div class="principle-title" data-de>Ihre Bedürfnisse, nicht unsere</div>
+      <div class="principle-title" data-en>Their needs, not ours</div>
+      <div class="principle-text" data-cs>Neoptimalizujeme pro výnos. Nepřesouváme úly za snůškou. Nedělíme roje silou. Včela má svůj rytmus — naší rolí je ho chránit.</div>
+      <div class="principle-text" data-de>Wir optimieren nicht für Ertrag. Wir verschieben keine Beuten nach dem Nektar. Wir teilen keine Schwärme mit Gewalt. Die Biene hat ihren eigenen Rhythmus — unsere Rolle ist es, ihn zu schützen.</div>
+      <div class="principle-text" data-en>We do not optimise for yield. We do not move hives to chase nectar. We do not split swarms by force. The bee has its own rhythm — our role is to protect it.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider" data-shared></div>
+
+<!-- ── PROČ VČELY / WARUM BIENEN ── -->
+<section>
+  <p class="section-label" data-cs>Proč včely</p>
+  <p class="section-label" data-de>Warum Bienen</p>
+  <p class="section-label" data-en>Why bees matter</p>
+
+  <h2 data-cs>Opylují <em>třetinu</em><br/>toho, co jíme</h2>
+  <h2 data-de>Sie bestäuben <em>ein Drittel</em><br/>unserer Nahrung</h2>
+  <h2 data-en>They pollinate <em>a third</em><br/>of what we eat</h2>
+
+  <p class="lead" data-cs>Včela medonosná je jedním z nejdůležitějších živočichů na planetě. Přestože váží sotva půl gramu, spoluvytváří základ naší potravinové bezpečnosti.</p>
+  <p class="lead" data-de>Die Honigbiene ist eines der wichtigsten Lebewesen auf unserem Planeten. Obwohl sie kaum einen halben Gramm wiegt, ist sie ein wesentlicher Grundstein unserer Ernährungssicherheit.</p>
+  <p class="lead" data-en>The honeybee is one of the most important creatures on the planet. Weighing barely half a gram, it underpins the foundation of our food security.</p>
+
+  <p data-cs>Celosvětově závisí na opylení hmyzem přes 75 % druhů kvetoucích rostlin a přibližně 35 % veškeré zemědělské produkce. V Evropě se hodnota opylování odhaduje na stovky miliard korun ročně — tichá práce, která se nikdy neobjevuje v účetních knihách.</p>
+  <p data-de>Weltweit sind über 75 % der blühenden Pflanzenarten und rund 35 % aller landwirtschaftlichen Produktion auf die Bestäubung durch Insekten angewiesen. In Europa wird der Wert der Bestäubung auf Hunderte von Milliarden Kronen jährlich geschätzt — eine stille Arbeit, die nie in den Büchern erscheint.</p>
+  <p data-en>Globally, over 75% of flowering plant species and around 35% of all agricultural production depend on insect pollination. In Europe alone, the value of pollination is estimated at hundreds of billions each year — quiet work that never appears in any ledger.</p>
+
+  <p data-cs>Bez včel bychom přišli o jablka, hrušky, třešně, borůvky, mandle, kávovník, slunečnici, řepku — seznam je téměř nekonečný. Jejich úbytek není jen ekologický problém. Je to problém civilizační.</p>
+  <p data-de>Ohne Bienen würden wir Äpfel, Birnen, Kirschen, Heidelbeeren, Mandeln, Kaffee, Sonnenblumen und Raps verlieren — die Liste ist nahezu endlos. Ihr Rückgang ist nicht nur ein ökologisches Problem. Es ist ein zivilisatorisches Problem.</p>
+  <p data-en>Without bees we would lose apples, pears, cherries, blueberries, almonds, coffee, sunflowers, oilseed rape — the list is nearly endless. Their decline is not just an ecological problem. It is a civilisational one.</p>
+
+  <!-- Facts -->
+  <div class="facts" data-shared>
+    <div class="fact">
+      <div class="fact-num">75%</div>
+      <div class="fact-text" data-cs>světových potravinových plodin závisí na opylovačích</div>
+      <div class="fact-text" data-de>der weltweiten Nahrungsmittelpflanzen sind von Bestäubern abhängig</div>
+      <div class="fact-text" data-en>of the world's food crops depend on pollinators</div>
+    </div>
+    <div class="fact">
+      <div class="fact-num">20 000</div>
+      <div class="fact-text" data-cs>druhů divokých včel existuje po celém světě</div>
+      <div class="fact-text" data-de>Wildbienenarten gibt es auf der ganzen Welt</div>
+      <div class="fact-text" data-en>species of wild bees exist around the world</div>
+    </div>
+    <div class="fact">
+      <div class="fact-num">−45%</div>
+      <div class="fact-text" data-cs>evropských opylovačů je ohroženo vyhynutím</div>
+      <div class="fact-text" data-de>der europäischen Bestäuber sind vom Aussterben bedroht</div>
+      <div class="fact-text" data-en>of European pollinators are threatened with extinction</div>
+    </div>
+    <div class="fact">
+      <div class="fact-num">2M</div>
+      <div class="fact-text" data-cs>km denně uletí včely z jednoho úlu při sběru nektaru</div>
+      <div class="fact-text" data-de>km fliegen Bienen aus einem Bienenstock täglich bei der Nektarsammlung</div>
+      <div class="fact-text" data-en>km flown daily by bees from a single hive while foraging for nectar</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" data-shared></div>
+
+<!-- ── SLOW FOOD ── -->
+<section>
+  <div class="split" data-shared>
+    <div class="split-img">
+      <img src="photos/med.jpg" alt="Čerstvý med" style="width:100%;height:100%;object-fit:cover;display:block;">
+    </div>
+    <div>
+      <p class="section-label" data-cs>Slow Food & včely</p>
+      <p class="section-label" data-de>Slow Food & Bienen</p>
+      <p class="section-label" data-en>Slow Food & bees</p>
+
+      <h2 data-cs>Med jako<br/><em>zápisník krajiny</em></h2>
+      <h2 data-de>Honig als<br/><em>Tagebuch der Landschaft</em></h2>
+      <h2 data-en>Honey as<br/><em>a notebook of the land</em></h2>
+
+      <p data-cs>Filosofie Slow Food stojí na třech pilířích: dobré, čisté a spravedlivé. Med je jejich dokonalým ztělesněním. Každá sklenice je zápisníkem krajiny — nese v sobě pyl místních rostlin, vůni konkrétního léta, otisk biodiverzity toho místa.</p>
+      <p data-de>Die Slow-Food-Philosophie basiert auf drei Säulen: gut, sauber und fair. Honig ist ihre perfekte Verkörperung. Jedes Glas ist ein Tagebuch der Landschaft — es trägt den Pollen lokaler Pflanzen, den Duft eines bestimmten Sommers, den Fingerabdruck der Biodiversität dieses Ortes in sich.</p>
+      <p data-en>Slow Food philosophy rests on three pillars: good, clean and fair. Honey is their perfect embodiment. Each jar is a notebook of the land — it carries the pollen of local plants, the scent of a particular summer, the imprint of that place's biodiversity.</p>
+
+      <p data-cs>Průmyslový med — ohřátý, přefiltrovaný, smíšený z neznámých zdrojů — tuto paměť ztrácí. Lokální med od malého včelaře je pravým opakem: transparentní, živý, neopakovatelný.</p>
+      <p data-de>Industrieller Honig — erhitzt, überfiltriert, aus unbekannten Quellen gemischt — verliert dieses Gedächtnis. Lokaler Honig von einem kleinen Imker ist das genaue Gegenteil: transparent, lebendig, unwiederholbar.</p>
+      <p data-en>Industrial honey — heated, over-filtered, blended from unknown sources — loses this memory. Local honey from a small beekeeper is the exact opposite: transparent, alive, unrepeatable.</p>
+
+      <div class="quote-block" data-shared>
+        <blockquote data-cs>„Zachránit včelu znamená zachránit krajinu. A zachránit krajinu znamená zachránit nás."</blockquote>
+        <blockquote data-de>„Eine Biene zu retten bedeutet, eine Landschaft zu retten. Und eine Landschaft zu retten bedeutet, uns selbst zu retten."</blockquote>
+        <blockquote data-en>"To save a bee is to save a landscape. And to save a landscape is to save ourselves."</blockquote>
+        <cite>Carlo Petrini, Slow Food</cite>
+      </div>
+
+      <p data-cs>Včely jsou pro Slow Food symbolem celého hnutí: malý, nenápadný živočich, jehož práce je zásadní a jehož zmizení bychom pocítili na každém talíři. Podpora lokálního včelaření je přímým činem v duchu Slow Food.</p>
+      <p data-de>Bienen sind für Slow Food das Symbol der gesamten Bewegung: Ein kleines, unscheinbares Tier, dessen Arbeit grundlegend ist und dessen Verschwinden wir auf jedem Teller spüren würden. Die Unterstützung lokaler Imkerei ist eine direkte Handlung im Geiste von Slow Food.</p>
+      <p data-en>Bees are for Slow Food the symbol of the entire movement: a small, unassuming creature whose work is fundamental, and whose disappearance we would feel on every plate. Supporting local beekeeping is a direct act in the spirit of Slow Food.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FULL-WIDTH IMAGE ── -->
+<div class="full-img" data-shared>
+  <img src="photos/hero.jpg" alt="Včely na plástvi" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center 40%;">
+</div>
+
+<div class="divider" data-shared style="margin-top: 0;"></div>
+
+<!-- ── HROZBY / BEDROHUNGEN ── -->
+<section>
+  <p class="section-label" data-cs>Co včely ohrožuje</p>
+  <p class="section-label" data-de>Was Bienen bedroht</p>
+  <p class="section-label" data-en>What threatens bees</p>
+
+  <h2 data-cs>Tiché<br/><em>mizení</em></h2>
+  <h2 data-de>Das stille<br/><em>Verschwinden</em></h2>
+  <h2 data-en>The quiet<br/><em>disappearance</em></h2>
+
+  <p class="lead" data-cs>Od počátku 21. století zmizel každý třetí divoký opylovač v Evropě. Přitom příčiny jsou dobře známé.</p>
+  <p class="lead" data-de>Seit Beginn des 21. Jahrhunderts ist jeder dritte Wildbestäuber in Europa verschwunden. Dabei sind die Ursachen gut bekannt.</p>
+  <p class="lead" data-en>Since the start of the 21st century, one in three wild pollinators in Europe has vanished. The causes are well understood.</p>
+
+  <p data-cs><strong>Pesticidy a herbicidy</strong> — zejména neonikotinoidy narušují orientaci včel a jejich schopnost nacházet cestu zpět do úlu. EU část z nich zakázala, ale problém přetrvává.</p>
+  <p data-de><strong>Pestizide und Herbizide</strong> — insbesondere Neonikotinoide stören die Orientierung der Bienen und ihre Fähigkeit, den Weg zurück zum Stock zu finden. Die EU hat einige davon verboten, aber das Problem besteht fort.</p>
+  <p data-en><strong>Pesticides and herbicides</strong> — neonicotinoids in particular disrupt bees' navigation and their ability to find their way back to the hive. The EU has banned some of them, but the problem persists.</p>
+
+  <p data-cs><strong>Úbytek habitatů</strong> — intenzivní zemědělství proměnilo krajinu v monokulturní plochy. Mizí meze, louky, remízky — místa, kde včely nachází potravu a úkryt.</p>
+  <p data-de><strong>Habitatverlust</strong> — intensive Landwirtschaft hat die Landschaft in monokulturelle Flächen verwandelt. Feldraine, Wiesen und Hecken verschwinden — Orte, wo Bienen Nahrung und Schutz finden.</p>
+  <p data-en><strong>Habitat loss</strong> — intensive farming has turned the landscape into monocultural expanses. Field margins, meadows, and copses disappear — the places where bees find food and shelter.</p>
+
+  <p data-cs><strong>Roztoč Varroa</strong> — parazit, který decimuje včelstva po celém světě. Pro včelaře je každoroční boj s varroou součástí rutiny. Pro divoké včely neexistuje pomoc žádná.</p>
+  <p data-de><strong>Varroa-Milbe</strong> — ein Parasit, der Bienenvölker auf der ganzen Welt dezimiert. Für Imker ist der jährliche Kampf gegen Varroa Teil der Routine. Für Wildbienen gibt es keine Hilfe.</p>
+  <p data-en><strong>Varroa mite</strong> — a parasite that decimates colonies worldwide. For beekeepers, the annual fight against varroa is routine. For wild bees, there is no help at all.</p>
+
+  <p data-cs><strong>Klimatická změna</strong> — posouvá kvetení rostlin a aktivitu včel mimo synchron. Včela přiletí, květ odkvéte. Květ vykvete, včely ještě neletí.</p>
+  <p data-de><strong>Klimawandel</strong> — verschiebt die Blütezeit der Pflanzen und die Aktivität der Bienen außer Sync. Die Biene kommt, die Blüte ist verblüht. Die Blüte erblüht, die Bienen fliegen noch nicht.</p>
+  <p data-en><strong>Climate change</strong> — shifts plant flowering and bee activity out of sync. The bee arrives; the blossom is over. The blossom opens; the bees are not yet flying.</p>
+</section>
+
+<div class="divider" data-shared></div>
+
+<!-- ── CO MŮŽEŠ UDĚLAT / WAS DU TUN KANNST ── -->
+<section>
+  <p class="section-label" data-cs>Co můžeš udělat</p>
+  <p class="section-label" data-de>Was du tun kannst</p>
+  <p class="section-label" data-en>What you can do</p>
+
+  <h2 data-cs>Každý čin<br/><em>má smysl</em></h2>
+  <h2 data-de>Jede Handlung<br/><em>zählt</em></h2>
+  <h2 data-en>Every action<br/><em>counts</em></h2>
+
+  <p class="lead" data-cs>Pomoci včelám neznamená stát se včelařem. Stačí malé, vědomé kroky.</p>
+  <p class="lead" data-de>Den Bienen zu helfen bedeutet nicht, Imker zu werden. Es genügen kleine, bewusste Schritte.</p>
+  <p class="lead" data-en>Helping bees does not mean becoming a beekeeper. Small, conscious steps are enough.</p>
+
+  <div class="facts" data-shared>
+    <div class="fact">
+      <div class="fact-num" style="font-size:0;padding-bottom:8px">
+        <svg width="36" height="36" viewBox="0 0 44 44" fill="none" stroke="var(--honey)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 38C22 38 22 18 22 9"/>
+          <path d="M22 24C18 20 13 19 11 16C9 13 12 8 18 10C21 11 22 14 22 14"/>
+          <path d="M22 18C26 14 31 13 33 10C35 7 32 2 26 4C23 5 22 8 22 8"/>
+        </svg>
+      </div>
+      <div class="fact-text" data-cs><strong>Saď pro včely</strong> — levandule, lípa, jetel, phacelia, svída. I jeden záhon na balkoně má hodnotu.</div>
+      <div class="fact-text" data-de><strong>Pflanze für Bienen</strong> — Lavendel, Linde, Klee, Phacelie, Kornelkirsche. Auch ein Beet auf dem Balkon hat Wert.</div>
+      <div class="fact-text" data-en><strong>Plant for bees</strong> — lavender, linden, clover, phacelia, dogwood. Even one pot on a balcony makes a difference.</div>
+    </div>
+    <div class="fact">
+      <div class="fact-num" style="font-size:0;padding-bottom:8px">
+        <svg width="36" height="36" viewBox="0 0 44 44" fill="none" stroke="var(--honey)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 18C14 18 11 17 11 14C11 11 13 10 16 11L28 11C31 10 33 11 33 14C33 17 30 18 30 18"/>
+          <path d="M13 18C13 18 10 22 10 28C10 35 15 40 22 40C29 40 34 35 34 28C34 22 31 18 31 18Z"/>
+          <path d="M18 11L19 7L25 7L26 11"/>
+          <path d="M17 27C17 24 20 22 22 24C24 22 27 24 27 27"/>
+        </svg>
+      </div>
+      <div class="fact-text" data-cs><strong>Kupuj lokální med</strong> — od místního včelaře, ne z neznámé směsi. Znáš původ, víš, co kupuješ.</div>
+      <div class="fact-text" data-de><strong>Kaufe lokalen Honig</strong> — vom lokalen Imker, nicht aus einer unbekannten Mischung. Du kennst die Herkunft, weißt, was du kaufst.</div>
+      <div class="fact-text" data-en><strong>Buy local honey</strong> — from a local beekeeper, not an unknown blend. You know the origin, you know what you're buying.</div>
+    </div>
+    <div class="fact">
+      <div class="fact-num" style="font-size:0;padding-bottom:8px">
+        <svg width="36" height="36" viewBox="0 0 44 44" fill="none" stroke="var(--honey)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 14C10 14 8 18 8 22C8 29 12 34 18 36L26 36C32 34 36 29 36 22C36 18 34 14 34 14"/>
+          <path d="M15 14C15 11 19 9 22 9C25 9 29 11 29 14"/>
+          <line x1="14" y1="20" x2="30" y2="20"/>
+          <line x1="9" y1="8" x2="35" y2="36"/>
+        </svg>
+      </div>
+      <div class="fact-text" data-cs><strong>Vyhni se pesticidům</strong> — na zahradě, na terase. Chemie nezabíjí jen škůdce.</div>
+      <div class="fact-text" data-de><strong>Vermeide Pestizide</strong> — im Garten, auf der Terrasse. Chemikalien töten nicht nur Schädlinge.</div>
+      <div class="fact-text" data-en><strong>Avoid pesticides</strong> — in the garden, on the terrace. Chemicals don't only kill pests.</div>
+    </div>
+    <div class="fact">
+      <div class="fact-num" style="font-size:0;padding-bottom:8px">
+        <svg width="36" height="36" viewBox="0 0 44 44" fill="none" stroke="var(--honey)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 6C22 6 10 20 10 28C10 35 15 40 22 40C29 40 34 35 34 28C34 20 22 6 22 6Z"/>
+          <path d="M16 32C16 32 14 29 14 27"/>
+        </svg>
+      </div>
+      <div class="fact-text" data-cs><strong>Postav napajedlo</strong> — mělká miska s kameny a vodou. V létě včely potřebují vodu stejně jako my.</div>
+      <div class="fact-text" data-de><strong>Baue eine Tränke</strong> — eine flache Schale mit Steinen und Wasser. Im Sommer brauchen Bienen Wasser genauso wie wir.</div>
+      <div class="fact-text" data-en><strong>Set out a water source</strong> — a shallow dish with stones and water. In summer, bees need water just as much as we do.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BLOG / ZÁPISKY ── -->
+<div class="divider" data-shared></div>
+<section>
+  <p class="section-label" data-cs>Ze včelnice</p>
+  <p class="section-label" data-de>Aus dem Bienenstock</p>
+  <p class="section-label" data-en>From the apiary</p>
+
+  <h2 data-cs>Zápisky<br/><em>ze sezóny</em></h2>
+  <h2 data-de>Notizen<br/><em>aus der Saison</em></h2>
+  <h2 data-en>Notes<br/><em>from the season</em></h2>
+
+  <div class="posts-grid" data-shared>
+    <!-- Post 1 -->
+    <div class="post-card">
+      <div class="post-card-img">
+        <div class="post-card-img-placeholder" style="background:#ede0c8;"></div>
+      </div>
+      <div class="post-card-body">
+        <div class="post-date" data-cs>Jaro 2025</div>
+        <div class="post-date" data-de>Frühjahr 2025</div>
+        <div class="post-date" data-en>Spring 2025</div>
+        <div class="post-title" data-cs>První prohlídka — co zimovalo?</div>
+        <div class="post-title" data-de>Erste Durchsicht — was hat überwintert?</div>
+        <div class="post-title" data-en>First inspection — who made it through winter?</div>
+        <div class="post-excerpt" data-cs>Po první teplé neděli přichází chvíle, na kterou jsem čekal celou zimu. Otevírám úl a počítám…</div>
+        <div class="post-excerpt" data-de>Nach dem ersten warmen Sonntag kommt der Moment, auf den ich den ganzen Winter gewartet habe. Ich öffne den Stock und zähle…</div>
+        <div class="post-excerpt" data-en>After the first warm Sunday comes the moment I've been waiting for all winter. I open the hive and count…</div>
+      </div>
+    </div>
+    <!-- Post 2 -->
+    <div class="post-card">
+      <div class="post-card-img">
+        <div class="post-card-img-placeholder" style="background:#e0cfa0;"></div>
+      </div>
+      <div class="post-card-body">
+        <div class="post-date" data-cs>Léto 2025</div>
+        <div class="post-date" data-de>Sommer 2025</div>
+        <div class="post-date" data-en>Summer 2025</div>
+        <div class="post-title" data-cs>Lipový med — chuť jednoho léta</div>
+        <div class="post-title" data-de>Lindenhonig — der Geschmack eines Sommers</div>
+        <div class="post-title" data-en>Linden honey — the taste of one summer</div>
+        <div class="post-excerpt" data-cs>Lípa kvete jen pár dní. Včely to vědí a vytáhnou ze včelnice vše. Výsledek stojí za čekání.</div>
+        <div class="post-excerpt" data-de>Die Linde blüht nur wenige Tage. Die Bienen wissen das und holen alles aus dem Stock heraus. Das Ergebnis lohnt das Warten.</div>
+        <div class="post-excerpt" data-en>The linden flowers for just a few days. The bees know this and pour everything into it. The result is worth waiting for.</div>
+      </div>
+    </div>
+    <!-- Post 3 -->
+    <div class="post-card">
+      <div class="post-card-img">
+        <div class="post-card-img-placeholder" style="background:#cfc4b0;"></div>
+      </div>
+      <div class="post-card-body">
+        <div class="post-date" data-cs>Podzim 2025</div>
+        <div class="post-date" data-de>Herbst 2025</div>
+        <div class="post-date" data-en>Autumn 2025</div>
+        <div class="post-title" data-cs>Příprava na zimu — dost medu, dost klidu</div>
+        <div class="post-title" data-de>Wintervorbereitung — genug Honig, genug Ruhe</div>
+        <div class="post-title" data-en>Preparing for winter — enough honey, enough quiet</div>
+        <div class="post-excerpt" data-cs>Září patří včelám. Cukrový sirup, léčba varroózy, kontrola prostoru. Chci, aby přečkaly dobře.</div>
+        <div class="post-excerpt" data-de>Der September gehört den Bienen. Zuckersirup, Varroabehandlung, Raumkontrolle. Ich möchte, dass sie gut überwintern.</div>
+        <div class="post-excerpt" data-en>September belongs to the bees. Leaving enough stores, checking the space. I want them to come through well.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer data-shared>
+  <div class="footer-logo" style="display:flex;align-items:center;gap:8px;">
+    <svg width="20" height="20" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 28C16 20 28 20 28 28C28 36 16 36 16 28Z"/>
+      <path d="M18 19C18 14 26 14 26 19C26 23 18 23 18 19Z"/>
+      <path d="M18 25C14 22 10 17 16 14"/>
+      <path d="M26 25C30 22 34 17 28 14"/>
+      <line x1="17" y1="27" x2="27" y2="27"/>
+      <line x1="16.5" y1="31" x2="27.5" y2="31"/>
+      <path d="M20 14C18 11 16 9 15 8"/>
+      <path d="M24 14C26 11 28 9 29 8"/>
+      <circle cx="15" cy="8" r="1.2" fill="currentColor" stroke="none"/>
+      <circle cx="29" cy="8" r="1.2" fill="currentColor" stroke="none"/>
+    </svg>
+    Včely · Bienen · Bees
+  </div>
+  <div class="footer-note" data-cs>Psáno s láskou ke krajině a pomalému jídlu.</div>
+  <div class="footer-note" data-de>Geschrieben mit Liebe zur Landschaft und zum langsamen Essen.</div>
+  <div class="footer-note" data-en>Written with love for the land and slow food.</div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.getElementById('btn-cs').classList.toggle('active', lang === 'cs');
+    document.getElementById('btn-de').classList.toggle('active', lang === 'de');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('lang', lang);
+  }
+
+  // Restore saved language
+  const saved = localStorage.getItem('lang');
+  if (saved === 'de' || saved === 'en') setLang(saved);
+</script>
+</body>
+</html>
