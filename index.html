@@ -8,457 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --cream: #faf6ef;
-      --warm-white: #fffdf9;
-      --honey: #c8860a;
-      --honey-light: #e8a020;
-      --dark: #1c1a16;
-      --mid: #4a4540;
-      --light: #9a9088;
-      --border: #e8e0d0;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--warm-white);
-      color: var(--dark);
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      line-height: 1.75;
-    }
-
-    /* ── Language toggle ── */
-    .lang-bar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: flex-end;
-      padding: 14px 28px;
-      background: linear-gradient(to bottom, rgba(255,253,249,0.95), transparent);
-    }
-    .lang-switcher {
-      display: flex;
-      gap: 4px;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 3px;
-      background: var(--warm-white);
-    }
-    .lang-switcher button {
-      border: none;
-      background: none;
-      cursor: pointer;
-      padding: 4px 14px;
-      border-radius: 16px;
-      font-family: 'Inter', sans-serif;
-      font-size: .75rem;
-      font-weight: 500;
-      letter-spacing: .08em;
-      color: var(--light);
-      transition: all .2s;
-    }
-    .lang-switcher button.active {
-      background: var(--dark);
-      color: var(--warm-white);
-    }
-
-    /* ── Hero ── */
-    .hero {
-      position: relative;
-      height: 100svh;
-      min-height: 520px;
-      display: flex;
-      align-items: flex-end;
-      overflow: hidden;
-    }
-    .hero-img {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      filter: brightness(.65);
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top,
-        rgba(10,8,4,.82) 0%,
-        rgba(10,8,4,.45) 38%,
-        rgba(10,8,4,.0) 68%);
-      pointer-events: none;
-    }
-    .hero-placeholder {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(160deg, #3d2e0a 0%, #7a5010 45%, #c8860a 100%);
-    }
-    .hero-placeholder-icon {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 8rem;
-      opacity: .12;
-      user-select: none;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      padding: 0 8vw 10vh;
-      max-width: 900px;
-    }
-    .hero-eyebrow {
-      font-size: .72rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--honey-light);
-      margin-bottom: 16px;
-      white-space: nowrap;
-    }
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.6rem, 7vw, 5.5rem);
-      font-weight: 400;
-      color: #fff;
-      line-height: 1.12;
-      text-shadow: 0 2px 24px rgba(0,0,0,.45);
-      margin-bottom: 20px;
-    }
-    .hero-title em {
-      font-style: italic;
-      color: var(--honey-light);
-    }
-    .hero-sub {
-      font-size: clamp(.88rem, 1.5vw, 1rem);
-      color: rgba(255,255,255,.72);
-      max-width: 480px;
-      line-height: 1.7;
-    }
-    .scroll-hint {
-      position: absolute;
-      bottom: 36px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      color: rgba(255,255,255,.4);
-      font-size: .68rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      animation: bounce 2.4s ease-in-out infinite;
-    }
-    .scroll-hint::after {
-      content: '';
-      display: block;
-      width: 1px;
-      height: 40px;
-      background: rgba(255,255,255,.25);
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(6px); }
-    }
-
-    /* ── Sections ── */
-    section {
-      padding: 72px 8vw;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .section-label {
-      font-size: .7rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--honey);
-      margin-bottom: 20px;
-    }
-    h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 400;
-      line-height: 1.2;
-      margin-bottom: 32px;
-      color: var(--dark);
-    }
-    h2 em { font-style: italic; color: var(--honey); }
-
-    .lead {
-      font-size: clamp(1rem, 1.6vw, 1.12rem);
-      color: var(--mid);
-      max-width: 640px;
-      margin-bottom: 28px;
-    }
-    p {
-      color: var(--mid);
-      max-width: 640px;
-      margin-bottom: 20px;
-    }
-    p:last-child { margin-bottom: 0; }
-
-    /* ── Manifesto ── */
-    .manifesto {
-      background: var(--dark);
-      padding: 80px 8vw;
-    }
-    .manifesto .section-label { color: var(--honey-light); }
-    .manifesto h2 { color: #fff; max-width: 700px; }
-    .manifesto h2 em { color: var(--honey-light); }
-    .manifesto .principles {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 40px 60px;
-      margin-top: 52px;
-      max-width: 860px;
-    }
-    .principle-icon { margin-bottom: 16px; color: var(--honey-light); }
-    .principle-icon svg { display: block; }
-    .principle-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 8px;
-    }
-    .principle-text {
-      font-size: .84rem;
-      color: rgba(255,255,255,.55);
-      line-height: 1.7;
-    }
-    .manifesto-lead {
-      font-size: clamp(1rem, 1.6vw, 1.12rem);
-      color: rgba(255,255,255,.7);
-      max-width: 620px;
-      margin-bottom: 0;
-    }
-
-    /* ── Divider ── */
-    .divider {
-      width: 48px;
-      height: 2px;
-      background: var(--honey);
-      margin: 0 auto 0;
-      max-width: 1100px;
-      padding: 0 8vw;
-      box-sizing: content-box;
-    }
-
-    /* ── Facts grid ── */
-    .facts {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
-      margin-top: 48px;
-      background: var(--border);
-    }
-    .fact {
-      background: var(--warm-white);
-      padding: 36px 28px;
-    }
-    .fact-num {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
-      font-weight: 600;
-      color: var(--honey);
-      line-height: 1;
-      margin-bottom: 10px;
-    }
-    .fact-text {
-      font-size: .85rem;
-      color: var(--mid);
-      line-height: 1.6;
-    }
-
-    /* ── Image + text split ── */
-    .split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    @media (max-width: 720px) {
-      .split { grid-template-columns: 1fr; gap: 40px; }
-    }
-    @media (max-width: 600px) {
-      section { padding: 52px 6vw; }
-      .manifesto { padding: 60px 6vw; }
-      .manifesto .principles { grid-template-columns: 1fr; gap: 36px; }
-      .facts { grid-template-columns: 1fr; }
-    }
-    .split-img {
-      aspect-ratio: 4/5;
-      overflow: hidden;
-      border-radius: 2px;
-    }
-    .split-img img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .split-img-placeholder {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #e8d5b0 0%, #c8a060 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
-      color: rgba(255,255,255,.5);
-    }
-
-    /* ── Blog posts ── */
-    .posts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2px;
-      margin-top: 48px;
-      background: var(--border);
-    }
-    .post-card {
-      background: var(--warm-white);
-      cursor: pointer;
-      transition: background .2s;
-    }
-    .post-card:hover { background: var(--cream); }
-    .post-card-img {
-      aspect-ratio: 16/10;
-      overflow: hidden;
-    }
-    .post-card-img img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform .4s ease;
-    }
-    .post-card:hover .post-card-img img { transform: scale(1.04); }
-    .post-card-img-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-    }
-    .post-card-body { padding: 24px 24px 28px; }
-    .post-date {
-      font-size: .68rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--light);
-      margin-bottom: 8px;
-    }
-    .post-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 400;
-      line-height: 1.35;
-      color: var(--dark);
-      margin-bottom: 10px;
-    }
-    .post-excerpt {
-      font-size: .82rem;
-      color: var(--mid);
-      line-height: 1.65;
-    }
-
-    /* ── Quote block ── */
-    .quote-block {
-      border-left: 3px solid var(--honey);
-      padding: 28px 36px;
-      margin: 60px 0;
-      background: var(--cream);
-    }
-    blockquote {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
-      color: var(--dark);
-      line-height: 1.5;
-      margin-bottom: 12px;
-    }
-    cite {
-      font-size: .78rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--honey);
-      font-style: normal;
-    }
-
-    /* ── Full-width image ── */
-    .full-img {
-      width: 100%;
-      height: 50vw;
-      max-height: 580px;
-      min-height: 260px;
-      overflow: hidden;
-      position: relative;
-    }
-    .full-img img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .full-img-placeholder {
-      width: 100%; height: 100%;
-      background: linear-gradient(180deg, #4a3010 0%, #8a5c1a 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 6rem;
-      opacity: .6;
-    }
-
-    /* ── Footer ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 8vw;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      color: var(--dark);
-    }
-    .footer-note {
-      font-size: .75rem;
-      color: var(--light);
-    }
-
-    /* ── Language visibility ── */
-    [data-cs], [data-de], [data-en] { display: none; }
-    html[lang="cs"] [data-cs] { display: revert; }
-    html[lang="de"] [data-de] { display: revert; }
-    html[lang="en"] [data-en] { display: revert; }
-    html[lang="cs"] section[data-cs], html[lang="cs"] div[data-cs],
-    html[lang="cs"] p[data-cs], html[lang="cs"] h2[data-cs],
-    html[lang="cs"] blockquote[data-cs] { display: block; }
-    html[lang="de"] section[data-de], html[lang="de"] div[data-de],
-    html[lang="de"] p[data-de], html[lang="de"] h2[data-de],
-    html[lang="de"] blockquote[data-de] { display: block; }
-    html[lang="en"] section[data-en], html[lang="en"] div[data-en],
-    html[lang="en"] p[data-en], html[lang="en"] h2[data-en],
-    html[lang="en"] blockquote[data-en] { display: block; }
-
-    /* shared (lang-neutral) elements always visible */
-    [data-shared] { display: revert; }
-    div[data-shared], section[data-shared] { display: block; }
-    /* restore grid/flex on containers that also carry data-shared */
-    .facts[data-shared], .posts-grid[data-shared], .split[data-shared], .principles[data-shared] { display: grid; }
-    footer[data-shared] { display: flex; }
-  </style>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
@@ -831,14 +381,14 @@
 
   <div class="posts-grid" data-shared>
     <!-- Post 1 -->
-    <div class="post-card">
+    <a class="post-card" href="clanky/prvni-vcely.html">
       <div class="post-card-img">
         <div class="post-card-img-placeholder" style="background:#ede0c8;"></div>
       </div>
       <div class="post-card-body">
-        <div class="post-date" data-cs>Jaro 2025</div>
-        <div class="post-date" data-de>Frühjahr 2025</div>
-        <div class="post-date" data-en>Spring 2025</div>
+        <div class="post-date" data-cs>Březen 2026</div>
+        <div class="post-date" data-de>März 2026</div>
+        <div class="post-date" data-en>March 2026</div>
         <div class="post-title" data-cs>První včelstva přišla do Slepičích hor</div>
         <div class="post-title" data-de>Die ersten Völker kommen in die Hühnerberge</div>
         <div class="post-title" data-en>The first colonies arrive in Slepičí Hory</div>
@@ -846,16 +396,16 @@
         <div class="post-excerpt" data-de>An einem Aprilmorgen trugen wir die ersten zwei Warré-Beuten an den Waldrand über Kaplice. Wir öffneten die Fluglöcher und beobachteten, wie die Bienen zum ersten Mal in die Landschaft ausflogen, die nun ihr Zuhause werden soll.</div>
         <div class="post-excerpt" data-en>On an April morning we carried the first two Warré hives to the forest edge above Kaplice. We quietly opened the entrances and watched as the bees flew out for the first time into the landscape that would from now on be their home.</div>
       </div>
-    </div>
+    </a>
     <!-- Post 2 -->
-    <div class="post-card">
+    <a class="post-card" href="clanky/warre-ul.html">
       <div class="post-card-img">
         <div class="post-card-img-placeholder" style="background:#d8ccb4;"></div>
       </div>
       <div class="post-card-body">
-        <div class="post-date" data-cs>Léto 2025</div>
-        <div class="post-date" data-de>Sommer 2025</div>
-        <div class="post-date" data-en>Summer 2025</div>
+        <div class="post-date" data-cs>Duben 2026</div>
+        <div class="post-date" data-de>April 2026</div>
+        <div class="post-date" data-en>April 2026</div>
         <div class="post-title" data-cs>Co je vlastně včelaření ve Warré úlu?</div>
         <div class="post-title" data-de>Was ist eigentlich Imkerei in der Warré-Beute?</div>
         <div class="post-title" data-en>What is beekeeping in a Warré hive, really?</div>
@@ -863,16 +413,16 @@
         <div class="post-excerpt" data-de>Abbé Warré verbrachte Jahrzehnte damit, eine Beute zu finden, die natürlichen Baumhöhlen so nah wie möglich kommt. Das Ergebnis ist eine einfache Konstruktion, in der Bienen von oben nach unten bauen — so wie sie es Millionen von Jahren vor uns getan haben.</div>
         <div class="post-excerpt" data-en>Abbé Warré spent decades searching for a hive that would come as close as possible to natural tree cavities. The result is a simple design in which bees build from top to bottom — just as they have done for millions of years before us.</div>
       </div>
-    </div>
+    </a>
     <!-- Post 3 -->
-    <div class="post-card">
+    <a class="post-card" href="clanky/slow-food.html">
       <div class="post-card-img">
         <div class="post-card-img-placeholder" style="background:#c8bfa8;"></div>
       </div>
       <div class="post-card-body">
-        <div class="post-date" data-cs>Podzim 2025</div>
-        <div class="post-date" data-de>Herbst 2025</div>
-        <div class="post-date" data-en>Autumn 2025</div>
+        <div class="post-date" data-cs>Květen 2026</div>
+        <div class="post-date" data-de>Mai 2026</div>
+        <div class="post-date" data-en>May 2026</div>
         <div class="post-title" data-cs>Včely a Slow Food — nejde o výnos</div>
         <div class="post-title" data-de>Bienen und Slow Food — es geht nicht um den Ertrag</div>
         <div class="post-title" data-en>Bees and Slow Food — it's not about yield</div>
@@ -880,7 +430,7 @@
         <div class="post-excerpt" data-de>Wir arbeiten mit dem südböhmischen Slow-Food-Netzwerk an einem gemeinsamen Ziel: gesunde Bienen in der Kulturlandschaft. Nicht maximaler Honig, sondern maximaler Sinn. Honig als Zeugnis, dass die Landschaft noch lebt.</div>
         <div class="post-excerpt" data-en>We work with the South Bohemian Slow Food network towards a shared goal: healthy bees in a living landscape. Not maximum honey, but maximum meaning. Honey as evidence that the land is still alive.</div>
       </div>
-    </div>
+    </a>
   </div>
 </section>
 
